@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GhostLock</string>
+    <string name="title_dashboard">Stealth Dashboard</string>
+    <string name="status_armed">ARMED &amp; SECURED</string>
+    <string name="status_standby">STANDBY</string>
+    <string name="btn_lock_now">ENGAGE STEALTH LOCK</string>
+    <string name="btn_preview">TEST UNLOCK</string>
+</resources>

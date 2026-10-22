@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Shackle -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M44,42 V35 C44,29.5 48.5,25 54,25 C59.5,25 64,29.5 64,35 V42"
+        android:strokeWidth="5"
+        android:strokeColor="#00E5FF"
+        android:strokeLineCap="round" />
+    <!-- Padlock Body -->
+    <path
+        android:fillColor="#161B22"
+        android:pathData="M37,42 H71 C74.3,42 77,44.7 77,48 V74 C77,77.3 74.3,80 71,80 H37 C33.7,80 31,77.3 31,74 V48 C31,44.7 33.7,42 37,42 Z"
+        android:strokeWidth="2.5"
+        android:strokeColor="#00E5FF" />
+    <!-- Inner Cyber Accent lines -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M37,48 H71 M37,74 H71"
+        android:strokeWidth="1"
+        android:strokeColor="#1F2A38" />
+    <!-- Keyhole -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M54,54 C51.8,54 50,55.8 50,58 C50,59.7 51.1,61.1 52.7,61.7 L51.5,69 H56.5 L55.3,61.7 C56.9,61.1 58,59.7 58,58 C58,55.8 56.2,54 54,54 Z" />
+</vector>

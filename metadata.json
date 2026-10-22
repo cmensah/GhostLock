@@ -1,0 +1,6 @@
+{
+  "name": "GhostLock",
+  "description": "Stealth OLED black screen lock disguised as a powered-down display with secret gestures, rhythmic taps, quadrant patterns, fake dead battery tamper defense, and emergency corner PIN fail-safe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
