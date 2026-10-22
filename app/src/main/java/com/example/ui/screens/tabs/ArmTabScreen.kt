@@ -21,18 +21,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cancel
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.GridOn
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Security
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -44,10 +41,12 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.data.model.SecurityConfig
 import com.example.data.model.SecurityEvent
 import com.example.data.model.UnlockType
@@ -114,7 +113,7 @@ fun ArmTabScreen(
               )
               Spacer(modifier = Modifier.width(10.dp))
               Text(
-                text = "STEALTH SHIELD READY",
+                text = stringResource(R.string.status_shield_ready),
                 color = CyberGreen,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Bold
@@ -128,7 +127,11 @@ fun ArmTabScreen(
                 .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
               Text(
-                text = config.activeUnlockType.displayName,
+                text = when (config.activeUnlockType) {
+                  UnlockType.SYMBOL -> stringResource(R.string.tab_symbol)
+                  UnlockType.TAP_COUNT -> stringResource(R.string.tab_taps)
+                  UnlockType.QUADRANT_COMBO -> stringResource(R.string.tab_quadrants)
+                },
                 color = CyberCyanPrimary,
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold
@@ -158,13 +161,13 @@ fun ArmTabScreen(
                 Spacer(modifier = Modifier.width(12.dp))
                 Column {
                   Text(
-                    text = "Engaging Stealth Lock...",
+                    text = stringResource(R.string.msg_engaging_lock),
                     color = TextPrimary,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold
                   )
                   Text(
-                    text = "Display turning into pitch black",
+                    text = stringResource(R.string.msg_turning_black),
                     color = TextSecondary,
                     fontSize = 11.sp
                   )
@@ -196,7 +199,7 @@ fun ArmTabScreen(
                 Icon(Icons.Default.Lock, contentDescription = null, modifier = Modifier.size(20.dp))
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                  text = "ARM & ENGAGE STEALTH LOCK",
+                  text = stringResource(R.string.btn_arm_and_engage),
                   fontWeight = FontWeight.ExtraBold,
                   fontSize = 14.sp,
                   letterSpacing = 1.sp
@@ -210,7 +213,7 @@ fun ArmTabScreen(
                   verticalAlignment = Alignment.CenterVertically
                 ) {
                   Text(
-                    text = "${config.armDelaySeconds}s delay before blackout",
+                    text = stringResource(R.string.delay_configured, config.armDelaySeconds),
                     color = TextSecondary,
                     fontSize = 11.sp
                   )
@@ -219,7 +222,7 @@ fun ArmTabScreen(
                     modifier = Modifier.testTag("btn_lock_instant")
                   ) {
                     Text(
-                      text = "Lock Immediately (0s)",
+                      text = stringResource(R.string.btn_lock_immediate),
                       color = CyberCyanPrimary,
                       fontSize = 11.sp,
                       fontWeight = FontWeight.Bold
@@ -244,7 +247,7 @@ fun ArmTabScreen(
           verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
           Text(
-            text = "Active Unlock Secret",
+            text = stringResource(R.string.title_active_secret),
             color = TextPrimary,
             fontSize = 15.sp,
             fontWeight = FontWeight.Bold
@@ -285,14 +288,14 @@ fun ArmTabScreen(
                 }
                 Spacer(modifier = Modifier.width(12.dp))
                 Column(modifier = Modifier.weight(1f)) {
-                  Text("Continuous Symbol", color = TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
-                  Text("Drawn anywhere on the dark screen", color = TextSecondary, fontSize = 11.sp)
+                  Text(stringResource(R.string.unlock_symbol), color = TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                  Text(stringResource(R.string.unlock_symbol_desc), color = TextSecondary, fontSize = 11.sp)
                 }
                 Button(
                   onClick = { onOpenTrainer(UnlockType.SYMBOL) },
                   colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF003845), contentColor = CyberCyanPrimary)
                 ) {
-                  Text("Redraw", fontSize = 11.sp)
+                  Text(stringResource(R.string.btn_redraw), fontSize = 11.sp)
                 }
               }
               UnlockType.TAP_COUNT -> {
@@ -313,14 +316,14 @@ fun ArmTabScreen(
                 }
                 Spacer(modifier = Modifier.width(12.dp))
                 Column(modifier = Modifier.weight(1f)) {
-                  Text("${config.savedTapCount} Rhythmic Taps", color = TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
-                  Text("Tap consecutive rhythm on display", color = TextSecondary, fontSize = 11.sp)
+                  Text(stringResource(R.string.unlock_taps_format, config.savedTapCount), color = TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
+                  Text(stringResource(R.string.unlock_taps_desc), color = TextSecondary, fontSize = 11.sp)
                 }
                 Button(
                   onClick = { onOpenTrainer(UnlockType.TAP_COUNT) },
                   colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF003845), contentColor = CyberCyanPrimary)
                 ) {
-                  Text("Change", fontSize = 11.sp)
+                  Text(stringResource(R.string.btn_change), fontSize = 11.sp)
                 }
               }
               UnlockType.QUADRANT_COMBO -> {
@@ -336,13 +339,13 @@ fun ArmTabScreen(
                 Spacer(modifier = Modifier.width(12.dp))
                 Column(modifier = Modifier.weight(1f)) {
                   Text(config.savedQuadrantCombo.joinToString(" \u2192 ") { "Q$it" }, color = TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.SemiBold)
-                  Text("4 invisible touch quadrants", color = TextSecondary, fontSize = 11.sp)
+                  Text(stringResource(R.string.unlock_quadrants_desc), color = TextSecondary, fontSize = 11.sp)
                 }
                 Button(
                   onClick = { onOpenTrainer(UnlockType.QUADRANT_COMBO) },
                   colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF003845), contentColor = CyberCyanPrimary)
                 ) {
-                  Text("Change", fontSize = 11.sp)
+                  Text(stringResource(R.string.btn_change), fontSize = 11.sp)
                 }
               }
             }
@@ -369,16 +372,16 @@ fun ArmTabScreen(
             Row(verticalAlignment = Alignment.CenterVertically) {
               Icon(Icons.Default.History, contentDescription = null, tint = CyberCyanPrimary, modifier = Modifier.size(18.dp))
               Spacer(modifier = Modifier.width(8.dp))
-              Text("Security Activity", color = TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+              Text(stringResource(R.string.title_security_activity), color = TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.Bold)
             }
             TextButton(onClick = onViewLogs) {
-              Text("View All Logs", color = CyberCyanPrimary, fontSize = 11.sp)
+              Text(stringResource(R.string.btn_view_all_logs), color = CyberCyanPrimary, fontSize = 11.sp)
             }
           }
 
           if (recentLogs.isEmpty()) {
             Text(
-              text = "No lock activities or breaches logged yet.",
+              text = stringResource(R.string.msg_no_logs),
               color = TextSecondary,
               fontSize = 12.sp
             )

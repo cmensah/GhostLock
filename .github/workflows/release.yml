@@ -40,23 +40,65 @@ jobs:
           fi
           chmod +x gradlew
 
+      - name: Setup Android Keystores & Signing
+        run: |
+          echo "Configuring keystores for automated signing..."
+          # 1. Restore or generate debug.keystore for debugConfig signing
+          if [ -f debug.keystore.base64 ]; then
+            echo "Restoring debug.keystore from debug.keystore.base64"
+            base64 -d debug.keystore.base64 > debug.keystore
+          elif [ ! -f debug.keystore ]; then
+            echo "Generating fallback debug.keystore"
+            keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
+
+          # 2. Configure release upload keystore
+          if [ -n "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" ]; then
+            echo "Using custom release keystore from GitHub Secrets"
+            echo "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" | base64 -d > my-upload-key.jks
+          elif [ -f my-upload-key.jks.base64 ]; then
+            echo "Restoring my-upload-key.jks from repository base64"
+            base64 -d my-upload-key.jks.base64 > my-upload-key.jks
+          elif [ ! -f my-upload-key.jks ]; then
+            echo "Generating release upload keystore"
+            keytool -genkeypair -v -keystore my-upload-key.jks -alias upload -keyalg RSA -keysize 2048 -validity 10000 -storepass ghostlock -keypass ghostlock -dname "CN=GhostLock, OU=Security, O=OpenSource, L=Global, ST=Privacy, C=US"
+          fi
+          ls -l debug.keystore my-upload-key.jks
+
       - name: Run Unit & Robolectric Tests
         run: ./gradlew testDebugUnitTest --continue
 
       - name: Build Debug & Release APKs
-        run: ./gradlew assembleDebug assembleRelease
+        env:
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD || 'ghostlock' }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || 'ghostlock' }}
+        run: |
+          export STORE_PASSWORD="${STORE_PASSWORD:-ghostlock}"
+          export KEY_PASSWORD="${KEY_PASSWORD:-ghostlock}"
+          ./gradlew assembleDebug assembleRelease
 
       - name: Rename APK Artifacts for Distribution
         run: |
           mkdir -p release-artifacts
+          if [ -f app/build/outputs/apk/release/app-release.apk ]; then
+            echo "Found signed release APK"
+            cp app/build/outputs/apk/release/app-release.apk release-artifacts/GhostLock-release.apk
+          elif [ -f app/build/outputs/apk/release/app-release-unsigned.apk ]; then
+            echo "Found unsigned release APK"
+            cp app/build/outputs/apk/release/app-release-unsigned.apk release-artifacts/GhostLock-release-unsigned.apk
+          fi
           if [ -f app/build/outputs/apk/debug/app-debug.apk ]; then
+            echo "Found debug APK"
             cp app/build/outputs/apk/debug/app-debug.apk release-artifacts/GhostLock-debug.apk
           fi
-          if [ -f app/build/outputs/apk/release/app-release-unsigned.apk ]; then
-            cp app/build/outputs/apk/release/app-release-unsigned.apk release-artifacts/GhostLock-release-unsigned.apk
-          elif [ -f app/build/outputs/apk/release/app-release.apk ]; then
-            cp app/build/outputs/apk/release/app-release.apk release-artifacts/GhostLock-release.apk
-          fi
+          ls -lh release-artifacts/
+
+      - name: Upload APKs to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: GhostLock-APKs
+          path: release-artifacts/*.apk
+          retention-days: 30
 
       - name: Generate Release Tag & Name
         id: vars

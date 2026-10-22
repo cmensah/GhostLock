@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -36,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.example.R
 import com.example.ui.theme.CyberCyanPrimary
 import com.example.ui.theme.CyberDarkSurface
 import com.example.ui.theme.CyberDarkSurfaceVariant
@@ -82,13 +84,13 @@ fun EmergencyPinDialog(
           Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
               imageVector = Icons.Default.Lock,
-              contentDescription = "Master Override",
+              contentDescription = stringResource(R.string.emergency_keypad_title),
               tint = CyberCyanPrimary,
               modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-              text = "Emergency Override",
+              text = stringResource(R.string.emergency_keypad_title),
               color = TextPrimary,
               fontSize = 17.sp,
               fontWeight = FontWeight.Bold
@@ -99,12 +101,12 @@ fun EmergencyPinDialog(
             onClick = onDismiss,
             modifier = Modifier.testTag("dismiss_emergency_pin")
           ) {
-            Icon(Icons.Default.Close, contentDescription = "Dismiss", tint = TextSecondary)
+            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.btn_close), tint = TextSecondary)
           }
         }
 
         Text(
-          text = "Fail-safe corner triggered. Enter master recovery PIN to exit stealth lockdown.",
+          text = stringResource(R.string.emergency_keypad_desc),
           color = TextSecondary,
           fontSize = 12.sp,
           textAlign = TextAlign.Start,

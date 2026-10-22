@@ -40,7 +40,8 @@ class ExampleRobolectricTest {
     val customConfig = SecurityConfig(
       activeUnlockType = UnlockType.TAP_COUNT,
       savedTapCount = 5,
-      backupPin = "9876"
+      backupPin = "9876",
+      selectedLanguageTag = "fr"
     )
     repo.updateConfig(customConfig)
 
@@ -48,6 +49,17 @@ class ExampleRobolectricTest {
     assertEquals(UnlockType.TAP_COUNT, loaded.activeUnlockType)
     assertEquals(5, loaded.savedTapCount)
     assertEquals("9876", loaded.backupPin)
+    assertEquals("fr", loaded.selectedLanguageTag)
     assertTrue(loaded.showDeadBatteryOnTamper)
+  }
+
+  @Test
+  fun `french locale resolves localized arm label`() {
+    val context = ApplicationProvider.getApplicationContext<Context>()
+    val config = android.content.res.Configuration(context.resources.configuration)
+    config.setLocale(java.util.Locale.FRENCH)
+    val localizedContext = context.createConfigurationContext(config)
+    val armLabel = localizedContext.getString(R.string.nav_arm)
+    assertEquals("Armer", armLabel)
   }
 }

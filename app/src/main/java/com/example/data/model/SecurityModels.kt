@@ -54,7 +54,8 @@ data class SecurityConfig(
   val armDelaySeconds: Int = 3,
   val enableLockTask: Boolean = true,
   val autoReopenOnHome: Boolean = true,
-  val showDeadBatteryOnTamper: Boolean = true
+  val showDeadBatteryOnTamper: Boolean = true,
+  val selectedLanguageTag: String = "" // Empty string = System Default
 ) {
   companion object {
     fun defaultSymbolPoints(): List<PointF> {

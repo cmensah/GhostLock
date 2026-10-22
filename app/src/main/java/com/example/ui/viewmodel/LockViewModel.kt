@@ -408,6 +408,11 @@ class LockViewModel(application: Application) : AndroidViewModel(application) {
     repository.updateConfig(updated)
   }
 
+  fun setLanguage(languageTag: String) {
+    val updated = _uiState.value.config.copy(selectedLanguageTag = languageTag)
+    repository.updateConfig(updated)
+  }
+
   fun setBackupPin(pin: String) {
     if (pin.length in 4..8) {
       val updated = _uiState.value.config.copy(backupPin = pin)

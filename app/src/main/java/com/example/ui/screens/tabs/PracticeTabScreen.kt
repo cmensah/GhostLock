@@ -50,10 +50,12 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.data.model.PointF
 import com.example.data.model.SecurityConfig
 import com.example.data.model.UnlockType
@@ -111,13 +113,13 @@ fun PracticeTabScreen(
             Spacer(modifier = Modifier.width(10.dp))
             Column {
               Text(
-                text = "Interactive Practice Sandbox",
+                text = stringResource(R.string.title_practice_sandbox),
                 color = TextPrimary,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Test and fine-tune your secret gestures and taps without locking out your phone",
+                text = stringResource(R.string.desc_practice_sandbox),
                 color = TextSecondary,
                 fontSize = 11.sp
               )
@@ -153,9 +155,9 @@ fun PracticeTabScreen(
                 text = {
                   Text(
                     text = when (type) {
-                      UnlockType.SYMBOL -> "Symbol"
-                      UnlockType.TAP_COUNT -> "Taps"
-                      UnlockType.QUADRANT_COMBO -> "Quadrants"
+                      UnlockType.SYMBOL -> stringResource(R.string.tab_symbol)
+                      UnlockType.TAP_COUNT -> stringResource(R.string.tab_taps)
+                      UnlockType.QUADRANT_COMBO -> stringResource(R.string.tab_quadrants)
                     },
                     fontSize = 12.sp,
                     fontWeight = if (selectedIndex == index) FontWeight.Bold else FontWeight.Normal
@@ -184,7 +186,7 @@ fun PracticeTabScreen(
             verticalAlignment = Alignment.CenterVertically
           ) {
             Text(
-              text = "Live Test Screen",
+              text = stringResource(R.string.title_live_test),
               color = TextPrimary,
               fontSize = 14.sp,
               fontWeight = FontWeight.Bold
@@ -196,7 +198,7 @@ fun PracticeTabScreen(
             ) {
               Icon(Icons.Default.Edit, contentDescription = null, modifier = Modifier.size(14.dp))
               Spacer(modifier = Modifier.width(6.dp))
-              Text("Edit Code", fontSize = 11.sp)
+              Text(stringResource(R.string.btn_edit_code), fontSize = 11.sp)
             }
           }
 
@@ -291,9 +293,9 @@ fun PracticeTabScreen(
             ) {
               Text(
                 text = when (uiState.config.activeUnlockType) {
-                  UnlockType.SYMBOL -> "Draw your secret symbol on the pad"
-                  UnlockType.TAP_COUNT -> "Tap ${uiState.config.savedTapCount} times rhythmically anywhere"
-                  UnlockType.QUADRANT_COMBO -> "Tap zones in order: ${uiState.config.savedQuadrantCombo.joinToString(" \u2192 ") { "Q$it" }}"
+                  UnlockType.SYMBOL -> stringResource(R.string.hint_draw_symbol)
+                  UnlockType.TAP_COUNT -> stringResource(R.string.hint_tap_rhythm, uiState.config.savedTapCount)
+                  UnlockType.QUADRANT_COMBO -> stringResource(R.string.hint_tap_quadrants, uiState.config.savedQuadrantCombo.joinToString(" \u2192 ") { "Q$it" })
                 },
                 color = TextSecondary,
                 fontSize = 13.sp,
@@ -325,7 +327,7 @@ fun PracticeTabScreen(
               },
               colors = ButtonDefaults.outlinedButtonColors(contentColor = TextSecondary)
             ) {
-              Text("Clear Pad", fontSize = 11.sp)
+              Text(stringResource(R.string.btn_clear_pad), fontSize = 11.sp)
             }
 
             OutlinedButton(
@@ -335,7 +337,7 @@ fun PracticeTabScreen(
             ) {
               Icon(Icons.Default.BatteryAlert, contentDescription = null, modifier = Modifier.size(14.dp))
               Spacer(modifier = Modifier.width(6.dp))
-              Text("Test 🪫 Deception Flash", fontSize = 11.sp)
+              Text(stringResource(R.string.btn_test_battery_flash), fontSize = 11.sp)
             }
           }
         }

@@ -37,9 +37,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.data.model.UnlockType
 import com.example.ui.dialogs.PinConfigDialog
 import com.example.ui.dialogs.QuadrantTrainerDialog
@@ -59,10 +61,10 @@ import com.example.ui.theme.TextSecondary
 import com.example.ui.viewmodel.LockUiState
 import com.example.ui.viewmodel.LockViewModel
 
-enum class DashboardTab(val label: String, val icon: ImageVector, val tag: String) {
-  ARM("Arm", Icons.Default.Shield, "nav_arm"),
-  PRACTICE("Practice", Icons.Default.TouchApp, "nav_practice"),
-  SETTINGS("Settings & Safety", Icons.Default.Settings, "nav_settings")
+enum class DashboardTab(val labelResId: Int, val icon: ImageVector, val tag: String) {
+  ARM(R.string.nav_arm, Icons.Default.Shield, "nav_arm"),
+  PRACTICE(R.string.nav_practice, Icons.Default.TouchApp, "nav_practice"),
+  SETTINGS(R.string.nav_settings, Icons.Default.Settings, "nav_settings")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,9 +109,9 @@ fun DashboardScreen(
               )
               Text(
                 text = when (selectedTab) {
-                  DashboardTab.ARM -> "Stealth Arming Console"
-                  DashboardTab.PRACTICE -> "Interactive Training Sandbox"
-                  DashboardTab.SETTINGS -> "Lockdown & Emergency Settings"
+                  DashboardTab.ARM -> stringResource(R.string.subtitle_arm)
+                  DashboardTab.PRACTICE -> stringResource(R.string.subtitle_practice)
+                  DashboardTab.SETTINGS -> stringResource(R.string.subtitle_settings)
                 },
                 color = TextSecondary,
                 fontSize = 11.sp
@@ -122,7 +124,7 @@ fun DashboardScreen(
             onClick = { viewModel.setShowLogsDialog(true) },
             modifier = Modifier.testTag("action_logs")
           ) {
-            Icon(Icons.Default.History, contentDescription = "Security Audit Logs", tint = CyberCyanPrimary)
+            Icon(Icons.Default.History, contentDescription = stringResource(R.string.title_security_activity), tint = CyberCyanPrimary)
           }
         },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = CyberDarkSurface)
@@ -137,19 +139,20 @@ fun DashboardScreen(
       ) {
         DashboardTab.values().forEach { tab ->
           val isSelected = selectedTab == tab
+          val tabLabel = stringResource(tab.labelResId)
           NavigationBarItem(
             selected = isSelected,
             onClick = { selectedTab = tab },
             icon = {
               Icon(
                 imageVector = tab.icon,
-                contentDescription = tab.label,
+                contentDescription = tabLabel,
                 tint = if (isSelected) CyberCyanPrimary else TextSecondary
               )
             },
             label = {
               Text(
-                text = tab.label,
+                text = tabLabel,
                 fontSize = 11.sp,
                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                 color = if (isSelected) CyberCyanPrimary else TextSecondary

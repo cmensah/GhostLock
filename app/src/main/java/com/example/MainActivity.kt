@@ -26,6 +26,13 @@ import com.example.ui.screens.LockScreenOverlay
 import com.example.ui.theme.GhostLockTheme
 import com.example.ui.viewmodel.LockViewModel
 
+import android.content.res.Configuration
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import java.util.Locale
+
 class MainActivity : ComponentActivity() {
   private val viewModel: LockViewModel by viewModels()
 
@@ -34,19 +41,49 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
 
     setContent {
-      GhostLockTheme {
-        val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+      val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-        // Sync system window flags, brightness, lock task mode, and immersive bars based on LockState
-        LaunchedEffect(uiState.lockState, uiState.config.dimBrightnessToMin, uiState.config.enableLockTask) {
-          applySystemLockBehavior(
-            lockState = uiState.lockState,
-            dimBrightness = uiState.config.dimBrightnessToMin,
-            enableLockTask = uiState.config.enableLockTask
-          )
+      val currentContext = LocalContext.current
+      val currentConfig = LocalConfiguration.current
+
+      val localizedContext = remember(uiState.config.selectedLanguageTag) {
+        if (uiState.config.selectedLanguageTag.isNotEmpty()) {
+          val locale = Locale.forLanguageTag(uiState.config.selectedLanguageTag)
+          Locale.setDefault(locale)
+          val config = Configuration(currentConfig).apply {
+            setLocale(locale)
+          }
+          currentContext.createConfigurationContext(config)
+        } else {
+          currentContext
         }
+      }
 
-        Surface(modifier = Modifier.fillMaxSize()) {
+      val localizedConfig = remember(uiState.config.selectedLanguageTag) {
+        if (uiState.config.selectedLanguageTag.isNotEmpty()) {
+          Configuration(currentConfig).apply {
+            setLocale(Locale.forLanguageTag(uiState.config.selectedLanguageTag))
+          }
+        } else {
+          currentConfig
+        }
+      }
+
+      CompositionLocalProvider(
+        LocalContext provides localizedContext,
+        LocalConfiguration provides localizedConfig
+      ) {
+        GhostLockTheme {
+          // Sync system window flags, brightness, lock task mode, and immersive bars based on LockState
+          LaunchedEffect(uiState.lockState, uiState.config.dimBrightnessToMin, uiState.config.enableLockTask) {
+            applySystemLockBehavior(
+              lockState = uiState.lockState,
+              dimBrightness = uiState.config.dimBrightnessToMin,
+              enableLockTask = uiState.config.enableLockTask
+            )
+          }
+
+          Surface(modifier = Modifier.fillMaxSize()) {
           when (uiState.lockState) {
             LockState.DASHBOARD -> {
               DashboardScreen(
@@ -69,6 +106,7 @@ class MainActivity : ComponentActivity() {
                 viewModel = viewModel
               )
             }
+          }
           }
         }
       }

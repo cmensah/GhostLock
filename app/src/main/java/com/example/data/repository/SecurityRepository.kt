@@ -55,6 +55,7 @@ class SecurityRepository(context: Context) {
     val enableLockTask = prefs.getBoolean("enable_lock_task", true)
     val autoReopen = prefs.getBoolean("auto_reopen_on_home", true)
     val showDeadBattery = prefs.getBoolean("show_dead_battery_on_tamper", true)
+    val selectedLanguage = prefs.getString("selected_language_tag", "") ?: ""
 
     return SecurityConfig(
       activeUnlockType = unlockType,
@@ -69,7 +70,8 @@ class SecurityRepository(context: Context) {
       armDelaySeconds = armDelay,
       enableLockTask = enableLockTask,
       autoReopenOnHome = autoReopen,
-      showDeadBatteryOnTamper = showDeadBattery
+      showDeadBatteryOnTamper = showDeadBattery,
+      selectedLanguageTag = selectedLanguage
     )
   }
 
@@ -87,6 +89,7 @@ class SecurityRepository(context: Context) {
       putBoolean("enable_lock_task", config.enableLockTask)
       putBoolean("auto_reopen_on_home", config.autoReopenOnHome)
       putBoolean("show_dead_battery_on_tamper", config.showDeadBatteryOnTamper)
+      putString("selected_language_tag", config.selectedLanguageTag)
       putString("quadrant_combo", config.savedQuadrantCombo.joinToString(","))
       putString("symbol_points", serializePoints(config.savedSymbolPoints))
       apply()

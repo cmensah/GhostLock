@@ -24,9 +24,13 @@ import androidx.compose.material.icons.filled.BatteryAlert
 import androidx.compose.material.icons.filled.BrightnessLow
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Security
 import androidx.compose.material.icons.filled.Vibration
+import androidx.compose.ui.res.stringResource
+import com.example.R
+import com.example.ui.dialogs.LanguageSelectorDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -395,6 +399,62 @@ fun SettingsTabScreen(
             Text("View Logs", fontSize = 11.sp)
           }
         }
+      }
+
+      // Language Selector Card
+      var showLanguageDialog by remember { mutableStateOf(false) }
+
+      Card(
+        modifier = Modifier
+          .fillMaxWidth()
+          .testTag("language_settings_card"),
+        colors = CardDefaults.cardColors(containerColor = CyberDarkSurface),
+        shape = RoundedCornerShape(18.dp),
+        border = CardDefaults.outlinedCardBorder().copy(brush = androidx.compose.ui.graphics.SolidColor(CyberCyanPrimary.copy(alpha = 0.4f)))
+      ) {
+        Row(
+          modifier = Modifier
+            .fillMaxWidth()
+            .padding(18.dp),
+          horizontalArrangement = Arrangement.SpaceBetween,
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Row(modifier = Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Default.Language, contentDescription = null, tint = CyberCyanPrimary, modifier = Modifier.size(20.dp))
+            Spacer(modifier = Modifier.width(10.dp))
+            Column {
+              Text(stringResource(R.string.title_language), color = TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+              val activeLangName = when (config.selectedLanguageTag) {
+                "fr" -> "Français 🇫🇷"
+                "es" -> "Español 🇪🇸"
+                "de" -> "Deutsch 🇩🇪"
+                "pt" -> "Português 🇵🇹"
+                "en" -> "English 🇬🇧"
+                else -> "${stringResource(R.string.lang_system_default)} 🌐"
+              }
+              Text(activeLangName, color = CyberCyanPrimary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+            }
+          }
+
+          OutlinedButton(
+            onClick = { showLanguageDialog = true },
+            modifier = Modifier.testTag("btn_change_language"),
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = CyberCyanPrimary)
+          ) {
+            Text(stringResource(R.string.btn_change), fontSize = 11.sp)
+          }
+        }
+      }
+
+      if (showLanguageDialog) {
+        LanguageSelectorDialog(
+          currentTag = config.selectedLanguageTag,
+          onSelectLanguage = { tag ->
+            viewModel.setLanguage(tag)
+            showLanguageDialog = false
+          },
+          onDismiss = { showLanguageDialog = false }
+        )
       }
 
       // About & Open Source Card

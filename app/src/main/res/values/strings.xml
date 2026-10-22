@@ -1,8 +1,102 @@
 <resources>
     <string name="app_name">GhostLock</string>
-    <string name="title_dashboard">Stealth Dashboard</string>
-    <string name="status_armed">ARMED &amp; SECURED</string>
-    <string name="status_standby">STANDBY</string>
-    <string name="btn_lock_now">ENGAGE STEALTH LOCK</string>
-    <string name="btn_preview">TEST UNLOCK</string>
+
+    <!-- Navigation -->
+    <string name="nav_arm">Arm</string>
+    <string name="nav_practice">Practice</string>
+    <string name="nav_settings">Settings &amp; Safety</string>
+
+    <!-- Top Bar Subtitles -->
+    <string name="subtitle_arm">Stealth Arming Console</string>
+    <string name="subtitle_practice">Interactive Training Sandbox</string>
+    <string name="subtitle_settings">Lockdown &amp; Emergency Settings</string>
+
+    <!-- Arm Tab -->
+    <string name="status_shield_ready">STEALTH SHIELD READY</string>
+    <string name="btn_arm_and_engage">ARM &amp; ENGAGE STEALTH LOCK</string>
+    <string name="msg_engaging_lock">Engaging Stealth Lock…</string>
+    <string name="msg_turning_black">Display turning into pitch black</string>
+    <string name="delay_configured">%1$ds delay before blackout</string>
+    <string name="btn_lock_immediate">Lock Immediately (0s)</string>
+    <string name="title_active_secret">Active Unlock Secret</string>
+    <string name="btn_redraw">Redraw</string>
+    <string name="btn_change">Change</string>
+    <string name="title_security_activity">Security Activity</string>
+    <string name="btn_view_all_logs">View All Logs</string>
+    <string name="msg_no_logs">No lock activities or breaches logged yet.</string>
+
+    <!-- Unlock Types -->
+    <string name="unlock_symbol">Continuous Symbol</string>
+    <string name="unlock_symbol_desc">Drawn anywhere on the dark screen</string>
+    <string name="unlock_taps_format">%1$d Rhythmic Taps</string>
+    <string name="unlock_taps_desc">Tap consecutive rhythm on display</string>
+    <string name="unlock_quadrants_desc">4 invisible touch quadrants</string>
+
+    <!-- Practice Tab -->
+    <string name="title_practice_sandbox">Interactive Practice Sandbox</string>
+    <string name="desc_practice_sandbox">Test and fine-tune your secret gestures and taps without locking out your phone</string>
+    <string name="tab_symbol">Symbol</string>
+    <string name="tab_taps">Taps</string>
+    <string name="tab_quadrants">Quadrants</string>
+    <string name="title_live_test">Live Test Screen</string>
+    <string name="btn_edit_code">Edit Code</string>
+    <string name="hint_draw_symbol">Draw your secret symbol on the pad</string>
+    <string name="hint_tap_rhythm">Tap %1$d times rhythmically anywhere</string>
+    <string name="hint_tap_quadrants">Tap zones in order: %1$s</string>
+    <string name="btn_clear_pad">Clear Pad</string>
+    <string name="btn_test_battery_flash">Test 🪫 Deception Flash</string>
+
+    <!-- Settings Tab -->
+    <string name="title_emergency_failsafe">Emergency Fail-Safe &amp; Override</string>
+    <string name="desc_emergency_failsafe">Recover access if you ever forget your secret gesture or pattern</string>
+    <string name="hint_emergency_corner">Hold down the secret corner for 3 seconds on the dark screen to summon the master PIN override keypad.</string>
+    <string name="label_secret_corner">Secret Fail-Safe Corner:</string>
+    <string name="label_master_pin">Master Backup PIN</string>
+    <string name="master_pin_format">Configured: •••• (%1$d digits)</string>
+    <string name="btn_change_pin">Change PIN</string>
+
+    <!-- Lockdown Toggles -->
+    <string name="title_hardware_lockdown">Stealth &amp; Hardware Button Lockdown</string>
+    <string name="toggle_dead_battery">Fake Empty Battery on Tamper (🪫)</string>
+    <string name="toggle_dead_battery_desc">Flashes depleted 0% battery on buttons or wrong codes, then goes dark</string>
+    <string name="toggle_lock_task">Lock Task Mode (Disable Home &amp; Recents)</string>
+    <string name="toggle_lock_task_desc">Calls OS-level App Pinning to freeze Home, Recents, and Status bar</string>
+    <string name="toggle_anti_home">Instant Anti-Home Recapture</string>
+    <string name="toggle_anti_home_desc">Intercepts lifecycle on Home touch to instantly restore black screen</string>
+    <string name="toggle_fake_shutdown">Fake Low-Battery Shutdown</string>
+    <string name="toggle_fake_shutdown_desc">Displays simulated Android power-off screen before blacking out</string>
+    <string name="toggle_dim_brightness">Dim OLED Brightness to 0%</string>
+    <string name="toggle_dim_brightness_desc">Reduces backlight to absolute minimum for realistic screen-off</string>
+    <string name="toggle_haptic">Haptic Buzz on Unlock</string>
+    <string name="toggle_haptic_desc">Subtle vibration to confirm unlock without visual light</string>
+    <string name="label_arming_delay">Arming Delay</string>
+    <string name="desc_arming_delay">Countdown before dark screen engages</string>
+    <string name="delay_instant">Instant</string>
+
+    <!-- Language Selector -->
+    <string name="title_language">App Language</string>
+    <string name="desc_language">Change app display language or follow system</string>
+    <string name="lang_system_default">System Default</string>
+    <string name="btn_select_language">Change Language</string>
+
+    <!-- About & Open Source -->
+    <string name="title_about_app">GhostLock v1.0.0</string>
+    <string name="subtitle_about_app">Open Source Stealth Security</string>
+    <string name="desc_about_app">GhostLock is an open-source anti-tamper security tool. Zero network permissions, zero telemetry, and zero tracking. All secret gestures and PINs remain strictly encrypted on-device.</string>
+    <string name="label_cicd_pipeline">CI/CD Release Pipeline</string>
+    <string name="desc_cicd_pipeline">Automated APK builds on GitHub push</string>
+    <string name="btn_view_license">License</string>
+    <string name="btn_close">Close</string>
+
+    <!-- Deceptive Overlays -->
+    <string name="battery_depleted_header">0% Battery</string>
+    <string name="battery_connect_charger">Connect charger to power on</string>
+    <string name="shutdown_title">Power off</string>
+    <string name="shutdown_subtitle">Shutting down…</string>
+    <string name="shutdown_battery_warning">Battery critically low (0%)</string>
+
+    <!-- Emergency Keypad Dialog -->
+    <string name="emergency_keypad_title">EMERGENCY OVERRIDE</string>
+    <string name="emergency_keypad_desc">Enter master backup PIN to disable stealth mode</string>
+    <string name="error_incorrect_pin">Incorrect PIN. Try again.</string>
 </resources>

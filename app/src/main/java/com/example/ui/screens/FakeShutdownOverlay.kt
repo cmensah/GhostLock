@@ -27,9 +27,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.ui.theme.StealthOledBlack
 
 @Composable
@@ -67,7 +69,7 @@ fun FakeShutdownOverlay(
       ) {
         Icon(
           imageVector = Icons.Default.BatteryAlert,
-          contentDescription = "Battery critically low",
+          contentDescription = stringResource(R.string.shutdown_battery_warning),
           tint = Color(0xFFFF5252),
           modifier = Modifier.size(36.dp)
         )
@@ -84,7 +86,7 @@ fun FakeShutdownOverlay(
       Spacer(modifier = Modifier.height(24.dp))
 
       Text(
-        text = "Shutting down...",
+        text = stringResource(R.string.shutdown_subtitle),
         color = Color(0xFFF5F5F5),
         fontSize = 17.sp,
         fontWeight = FontWeight.Medium
@@ -93,7 +95,7 @@ fun FakeShutdownOverlay(
       Spacer(modifier = Modifier.height(6.dp))
 
       Text(
-        text = "Battery critically low (1%)",
+        text = stringResource(R.string.shutdown_battery_warning),
         color = Color(0xFF9E9E9E),
         fontSize = 13.sp
       )

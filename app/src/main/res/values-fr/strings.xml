@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">GhostLock</string>
+
+    <!-- Navigation -->
+    <string name="nav_arm">Armer</string>
+    <string name="nav_practice">Entraînement</string>
+    <string name="nav_settings">Paramètres &amp; Sécurité</string>
+
+    <!-- Top Bar Subtitles -->
+    <string name="subtitle_arm">Console d\'armement furtif</string>
+    <string name="subtitle_practice">Bac à sable d\'entraînement</string>
+    <string name="subtitle_settings">Paramètres d\'urgence et de verrouillage</string>
+
+    <!-- Arm Tab -->
+    <string name="status_shield_ready">BOUCLIER FURTIF PRÊT</string>
+    <string name="btn_arm_and_engage">ARMER ET VERROUILLER</string>
+    <string name="msg_engaging_lock">Activation du verrouillage furtif…</string>
+    <string name="msg_turning_black">Écran noir complet en cours</string>
+    <string name="delay_configured">%1$ds de délai avant écran noir</string>
+    <string name="btn_lock_immediate">Verrouiller immédiatement (0s)</string>
+    <string name="title_active_secret">Secret de déverrouillage actif</string>
+    <string name="btn_redraw">Redessiner</string>
+    <string name="btn_change">Modifier</string>
+    <string name="title_security_activity">Activité de sécurité</string>
+    <string name="btn_view_all_logs">Voir l\'historique</string>
+    <string name="msg_no_logs">Aucune activité ni tentative d\'intrusion enregistrée.</string>
+
+    <!-- Unlock Types -->
+    <string name="unlock_symbol">Symbole continu</string>
+    <string name="unlock_symbol_desc">Dessiné n\'importe où sur l\'écran noir</string>
+    <string name="unlock_taps_format">%1$d Tapes rythmées</string>
+    <string name="unlock_taps_desc">Tapez un rythme consécutif sur l\'écran</string>
+    <string name="unlock_quadrants_desc">4 quadrants tactiles invisibles</string>
+
+    <!-- Practice Tab -->
+    <string name="title_practice_sandbox">Bac à sable interactif</string>
+    <string name="desc_practice_sandbox">Testez vos gestes et tapes secrètes sans risque de vous enfermer</string>
+    <string name="tab_symbol">Symbole</string>
+    <string name="tab_taps">Tapes</string>
+    <string name="tab_quadrants">Quadrants</string>
+    <string name="title_live_test">Écran d\'essai en direct</string>
+    <string name="btn_edit_code">Modifier code</string>
+    <string name="hint_draw_symbol">Dessinez votre symbole secret sur l\'écran</string>
+    <string name="hint_tap_rhythm">Tapez %1$d fois en rythme n\'importe où</string>
+    <string name="hint_tap_quadrants">Touchez les zones dans l\'ordre : %1$s</string>
+    <string name="btn_clear_pad">Effacer</string>
+    <string name="btn_test_battery_flash">Tester l\'animation 🪫 batterie vide</string>
+
+    <!-- Settings Tab -->
+    <string name="title_emergency_failsafe">Secours d\'urgence &amp; Récupération</string>
+    <string name="desc_emergency_failsafe">Récupérez l\'accès si vous oubliez votre geste ou code secret</string>
+    <string name="hint_emergency_corner">Maintenez appuyé le coin secret pendant 3 secondes sur l\'écran noir pour afficher le clavier PIN de secours.</string>
+    <string name="label_secret_corner">Coin secret de secours :</string>
+    <string name="label_master_pin">Code PIN maître de secours</string>
+    <string name="master_pin_format">Configuré : •••• (%1$d chiffres)</string>
+    <string name="btn_change_pin">Changer PIN</string>
+
+    <!-- Lockdown Toggles -->
+    <string name="title_hardware_lockdown">Furtivité &amp; Blocage des boutons</string>
+    <string name="toggle_dead_battery">Fausse batterie vide en cas d\'intrusion (🪫)</string>
+    <string name="toggle_dead_battery_desc">Affiche une batterie à 0% en cas d\'erreur ou d\'appui bouton, puis redevient noir</string>
+    <string name="toggle_lock_task">Verrouillage de tâche (Bloquer Accueil &amp; Récents)</string>
+    <string name="toggle_lock_task_desc">Utilise l\'épinglage Android pour figer Accueil, Récents et la barre d\'état</string>
+    <string name="toggle_anti_home">Reprise instantanée anti-bouton Accueil</string>
+    <string name="toggle_anti_home_desc">Intercepte le retour à l\'accueil pour réafficher l\'écran noir immédiatement</string>
+    <string name="toggle_fake_shutdown">Fausse extinction batterie faible</string>
+    <string name="toggle_fake_shutdown_desc">Affiche une fausse animation d\'extinction Android avant l\'écran noir</string>
+    <string name="toggle_dim_brightness">Luminosité OLED à 0%</string>
+    <string name="toggle_dim_brightness_desc">Baisse le rétroéclairage au minimum pour simuler un écran éteint</string>
+    <string name="toggle_haptic">Vibration discrète au déverrouillage</string>
+    <string name="toggle_haptic_desc">Confirmation haptique discrète sans émission de lumière</string>
+    <string name="label_arming_delay">Délai d\'armement</string>
+    <string name="desc_arming_delay">Compte à rebours avant écran noir</string>
+    <string name="delay_instant">Instantané</string>
+
+    <!-- Language Selector -->
+    <string name="title_language">Langue de l\'application</string>
+    <string name="desc_language">Changer la langue d\'affichage ou suivre le système</string>
+    <string name="lang_system_default">Défaut du système</string>
+    <string name="btn_select_language">Changer de langue</string>
+
+    <!-- About & Open Source -->
+    <string name="title_about_app">GhostLock v1.0.0</string>
+    <string name="subtitle_about_app">Sécurité furtive Open Source</string>
+    <string name="desc_about_app">GhostLock est un outil de sécurité anti-intrusion open source. Zéro permission réseau, zéro télémétrie, zéro traçage. Tous les codes et gestes restent chiffrés localement.</string>
+    <string name="label_cicd_pipeline">Pipeline de publication CI/CD</string>
+    <string name="desc_cicd_pipeline">Builds APK automatisés à chaque push GitHub</string>
+    <string name="btn_view_license">Licence</string>
+    <string name="btn_close">Fermer</string>
+
+    <!-- Deceptive Overlays -->
+    <string name="battery_depleted_header">Batterie 0%</string>
+    <string name="battery_connect_charger">Branchez le chargeur pour allumer</string>
+    <string name="shutdown_title">Éteindre</string>
+    <string name="shutdown_subtitle">Arrêt en cours…</string>
+    <string name="shutdown_battery_warning">Niveau de batterie critique (0%)</string>
+
+    <!-- Emergency Keypad Dialog -->
+    <string name="emergency_keypad_title">RÉCUPÉRATION D\'URGENCE</string>
+    <string name="emergency_keypad_desc">Entrez le PIN maître de secours pour désactiver la protection</string>
+    <string name="error_incorrect_pin">PIN incorrect. Réessayez.</string>
+</resources>

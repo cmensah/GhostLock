@@ -33,10 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.ui.theme.StealthOledBlack
 
 @Composable
@@ -105,7 +107,7 @@ fun DeadBatteryTamperOverlay(
             // Warning Exclamation
             Icon(
               imageVector = Icons.Default.Warning,
-              contentDescription = "Battery Depleted",
+              contentDescription = stringResource(R.string.battery_depleted_header),
               tint = Color(0xFFFF3333),
               modifier = Modifier
                 .size(24.dp)
@@ -129,7 +131,7 @@ fun DeadBatteryTamperOverlay(
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-          text = "0% Battery",
+          text = stringResource(R.string.battery_depleted_header),
           color = Color(0xFFFF3333),
           fontSize = 17.sp,
           fontWeight = FontWeight.Bold,
@@ -140,7 +142,7 @@ fun DeadBatteryTamperOverlay(
         Spacer(modifier = Modifier.height(6.dp))
 
         Text(
-          text = "Connect charger to power on",
+          text = stringResource(R.string.battery_connect_charger),
           color = Color(0xFF888888),
           fontSize = 12.sp,
           fontWeight = FontWeight.Normal

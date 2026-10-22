@@ -128,9 +128,19 @@ cd GhostLock
 # Build debug APK
 ./gradlew assembleDebug
 
-# Output APK location:
+# Build signed release APK
+./gradlew assembleRelease
+
+# Output APK locations:
 # app/build/outputs/apk/debug/app-debug.apk
+# app/build/outputs/apk/release/app-release.apk
 ```
+
+### GitHub Actions CI/CD Signing
+The workflow at `.github/workflows/release.yml` automatically builds and signs both debug and release APKs out of the box. If you wish to sign release APKs with your own custom keystore, add the following GitHub Actions Secrets in your repository settings:
+- `RELEASE_KEYSTORE_BASE64`: Base64-encoded `.jks` file (`base64 -w 0 your-key.jks`)
+- `STORE_PASSWORD`: Keystore store password
+- `KEY_PASSWORD`: Key alias password
 
 ---
 
